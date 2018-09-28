@@ -1,0 +1,70 @@
+﻿@model IEnumerable<login.Models.userViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/datatable.css" rel="stylesheet" />
+<h2>Lista de usuarios</h2>
+
+
+<table class="table" id="usuarios">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Correo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sexo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estatus)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Correo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sexo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estatus)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Editar", "Account", new { id = item.Id },new { @class="btn btn-xs btn-primary" })
+                    @Html.ActionLink("Eliminar", "Eliminar", "Account", new { id = item.Id }, new { @class = "btn btn-xs btn-danger" })
+                    @Html.ActionLink("Cambiar Contraseña", "ChangePassword", "Manage", new { id = item.Id }, new { @class = "btn btn-xs btn-primary" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts
+{
+<script src="~/Scripts/datatable.js"></script>
+    <script>
+        $(document).ready(function () {
+            
+            $('#usuarios').DataTable();
+            $("input[type=search]").addClass("form-control");
+        });
+</script>
+    }
